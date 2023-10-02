@@ -1,0 +1,22 @@
+[
+  {
+    "userId": 1,
+    "name": "Arisha Barron",
+    "phoneNumber": "323-123-1111"
+  },
+  {
+    "userId": 2,
+    "name": "Branden Gibson",
+    "phoneNumber": "323-153-1432"
+  },
+  {
+    "userId": 3,
+    "name": "Rhonda Church",
+    "phoneNumber": "310-533-7143"
+  },
+  {
+    "userId": 4,
+    "name": "Georgina Hazel",
+    "phoneNumber": "818-433-6123"
+  }
+]
