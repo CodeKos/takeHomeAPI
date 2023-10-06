@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import userRoutes from './routes/users.js';
 const app =  express();
-const PORT = 6000;
+const PORT = 8080;
 import 'dotenv/config'
 import * as  mysql from 'mysql2'
 
@@ -17,7 +17,4 @@ app.get('/', (req, res) => {
     res.send('## Hey Man');
 } );
 
-// Create the connection to the database
-const connection = mysql.createConnection(process.env.DATABASE_URL)
 
-// simple query

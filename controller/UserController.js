@@ -1,22 +1,19 @@
 import * as mysql from "mysql2";
-import express, {request, response} from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import {User} from "../Users/User.js";
 const connection = mysql.createConnection(process.env.DATABASE_URL)
-connection.query('show tables', function (err, results, fields) {
-    console.log(results) // results contains rows returned by server
-    console.log(fields) // fields contains extra metadata about results, if available
-})
-
-
-const getAllUsers = (req, res) =>{
-    connection.query('select * from users', function (err , results) {
-        console.log(users)
-    })
-}
 
 export class UserController {
-
+    static async getUser(userId) {
+        let output
+        await connection.promise().query(`SELECT * FROM users where userId="${userId}"`)
+            .then((result) => {
+                console.log(result[0])
+                output = result[0]
+            })
+        console.log(output)
+        return new User().init(output)
+    }
     static async createUser(user)  {
         console.log("createUSER")
         const firstName = user.firstName
