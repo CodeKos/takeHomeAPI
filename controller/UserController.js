@@ -34,7 +34,7 @@ export class UserController {
             })
         })
 
-        console.log("ending connection")
+
     }
 
     static async getUsers() {

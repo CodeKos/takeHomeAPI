@@ -91,7 +91,7 @@ export class AccountController {
         let start =  new Transfer(from[0])
         let end = new Transfer(to[0])
         if (start.amount < amount) {
-            return response.send("NOT ENOUGH MONEY")
+            return response.send("NOT ENOUGH MONEY").sendStatus(200)
         }
         if (start.fromAccount != end.fromAccount) {
             let postDeduction = start.balance - amount
@@ -108,7 +108,7 @@ export class AccountController {
                 `toAccount="${end.fromAccount}", date="${new Date().toISOString().slice(0, 19).replace('T', ' ')}",` +
                 `transferId="${transferId1}", balance="${addedBalance}", amount="${amount}"`)
 
-            return response.send("TRANSFER SUCCESSFUL")
+            return response.send("TRANSFER SUCCESSFUL").sendStatus(200)
 
         } else {
             let addedBalance = end.balance + amount
@@ -118,7 +118,7 @@ export class AccountController {
                 `toAccount="${end.fromAccount}", date="${new Date().toISOString().slice(0, 19).replace('T', ' ')}",` +
                 `transferId="${transferId1}", balance="${addedBalance}", amount="${amount}"`)
 
-            return response.send("TRANSFER SUCCESSFUL")
+            return response.send("TRANSFER SUCCESSFUL").sendStatus(200)
         }
 
     }

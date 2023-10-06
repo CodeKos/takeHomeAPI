@@ -38,7 +38,7 @@ router.get('/', async (request,response) => {
             console.log("row: " + User.toJson(user))
             output.push(user)
         })
-    }).then(() => response.send(output))
+    }).then(() => response.send(output).sendStatus(200))
 })
 
 // user should have first name last name, phone number
@@ -54,10 +54,10 @@ router.post('/createUser', async (request, response) => {
         })
 
         await UserController.createUser(user)
-        return response.send("User Created")
+        return response.send("User Created").sendStatus(200)
     } catch (err) {
         console.error(err)
-        response.send(err)
+        response.send(err).sendStatus(500)
     }
 
 });
@@ -66,7 +66,7 @@ router.post('/createUser', async (request, response) => {
 router.get('/:userId/accounts', async (request, response) => {
     const userId = request.params.userId
     const accounts = await AccountController.getAccounts("6f883101-4ed3-4c1f-9956-4c0d449d4617")
-    response.send(accounts)
+    response.send(accounts).sendStatus(200)
 })
 
 // created an account
@@ -87,7 +87,7 @@ router.post('/:userId/createAccount', async (request, response) => {
         }
     }
 
-    return response.send("NO ACCOUNT MADE")
+    return response.send("NO ACCOUNT MADE").sendStatus(500)
 })
 
 //gets account information for a user
@@ -105,13 +105,13 @@ router.get('/:userId/accounts/:accountId', async (request, response) => {
 
         if (transactions.length >= 1) {
             // pick the first one that is your balance
-            return response.send(transactions[0])
+            return response.send(transactions[0]).sendStatus(200)
         } else {
-            return response.send("TRANSACTIONS NOT FOUND")
+            return response.send("TRANSACTIONS NOT FOUND").sendStatus(500)
         }
 
     } catch (err) {
-        response.send(err)
+        response.send(err).sendStatus(500)
     }
 
 });
@@ -152,7 +152,7 @@ router.post('/:userId/transferAmount', async (request, response) => {
             const toAccount = body.toAccount;
             await AccountController.transferAmount(150, "0cd98e6c-c25c-41ff-ab6a-350950a3181c", "4cbd4a92-d085-49ed-80d9-78c54dfd7ca3")
 
-            return response.send("TRANSFER SUCCESSFUL")
+            return response.send("TRANSFER SUCCESSFUL").sendStatus(200)
         }
 })
 export  default  router;
